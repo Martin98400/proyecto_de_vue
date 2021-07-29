@@ -1,8 +1,6 @@
 <template>
-  <div class="home m-3">
-    <!-- <button type="button" @click="vistaAgregar()" class="btn btn-primary">Agregar</button> -->
+  <div class="home m-3">    
     <b-button to="/agregar">Agregar</b-button>
-    <!-- <TablaBV :items="allTodos" :fields="campos"/> -->
     <TablaBV :items="allTodos" :fields="campos">
        <template slot="actions" slot-scope="{ item }">
            <b-button size="sm">Editar</b-button>
@@ -14,12 +12,12 @@
 
 <script>
 import {mapState, mapGetters} from 'vuex'
-import Tabla from '../components/Tabla.vue'
+
 import TablaBV from '../components/TablaBV.vue'
 export default {
   name: 'Home',
   components: {
-    Tabla,
+    
     TablaBV
   },
   data() {
