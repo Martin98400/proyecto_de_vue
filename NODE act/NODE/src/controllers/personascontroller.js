@@ -5,6 +5,7 @@ const connection  = require('../config/connections');
 
 
 function listar (req,res){
+
 if(connection){
     let sql = "select * from BOARDGAMES";
     
@@ -17,6 +18,22 @@ if(connection){
     })
 }
 }
+
+
+function listarFavorites (req,res){
+    
+    if(connection){
+        let sql = "select * from vfavorites";
+        
+        connection.query(sql, (err, data) => {
+            if(err) {
+                res.status(400).json(err);
+            } else {
+    
+            res.json(data);        }
+        })
+    }
+    }
 
 function optenerboardgamesid(req,res)
 {
@@ -113,19 +130,7 @@ function eliminar(req, res){
 
     }
 }
-function favorites (req,res){
-    if(connection){
-        let sql = "select * from FAVORITES";
-        
-        connection.query(sql, (err, favorites) => {
-            if(err) {
-                res.status(400).json(err);
-            } else {
-    
-            res.json(favorites);        }
-        })
-    }
-    }
+
 
 module.exports = {
     listar,
@@ -133,5 +138,5 @@ module.exports = {
     agregar,
     editar,
     eliminar,
-    favorites
+    listarFavorites
 }

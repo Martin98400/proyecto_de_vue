@@ -1,8 +1,10 @@
 <template>
   <div class="home m-3">    
-    <h3>Juegos </h3>
+    <h3>Juegos Favoritos </h3>
     <b-button to="/agregar" class="m-1">Agregar</b-button>
-    <Tabla :items="juegos" :fields="fields" :busy="loading" >
+    <b-button to="/detalle" class="m-1">Detalle</b-button>
+    <b-button to="/visualizar" class="m-1">Visualizar</b-button>
+    <Tabla :items="favorites" :fields="fields" :busy="loading" >
     </Tabla>
     <!-- <TablaBV :items="juegos" :fields="campos">
        <template slot="actions" slot-scope="{ item }">
@@ -36,20 +38,15 @@ export default {
   },
 
   computed: {
-    ...mapState(['juegos', 'loading'])
+    ...mapState(['favorites', 'loading'])
   },
   methods: {
-    ...mapActions(['listarjuegos']),
-    vistaAgregar() {
-      this.$router.push({ name: "Agregar" });
-    },
-    eliminar(item) {
-      console.log("item", item);
-    },
-    
+    ...mapActions(['listarfavorites']),
+
+   
   },
   mounted(){
-    this.listarjuegos();
+    this.listarfavorites();
   }
 }
 </script>
