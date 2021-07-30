@@ -1,7 +1,8 @@
 <template>
   <div class="home m-3">    
-    <b-button to="/agregar">Agregar</b-button>
-    <Tabla :items="juegos" >
+    <h3>Juegos </h3>
+    <b-button to="/agregar" class="m-1">Agregar</b-button>
+    <Tabla :items="juegos" :fields="fields" :busy="loading" >
     </Tabla>
     <!-- <TablaBV :items="juegos" :fields="campos">
        <template slot="actions" slot-scope="{ item }">
@@ -21,8 +22,21 @@ export default {
   components: {
     Tabla
   },
+  data() {
+    return {
+      fields: [
+        {key: 'ID', label: 'Clave'},
+        {key: 'Name',label:'Nombre'},
+        {key: 'Publisher', label: 'Editor'},
+        {key: 'Category', label:'Categoria'},
+        {key: 'Year', label:'Año'},
+        'acciones'
+      ]
+    }
+  },
+
   computed: {
-    ...mapState(['juegos'])
+    ...mapState(['juegos', 'loading'])
   },
   methods: {
     ...mapActions(['listarjuegos']),

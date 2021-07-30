@@ -1,7 +1,14 @@
 <template>
     <div>
-        <h1>Agregar</h1>
-        <form @submit.prevent="guardarTodo()">
+        <h1>Agregar Juego</h1>
+        <Input1
+            titulo="Nombre"
+            :id="ID"
+            placeholder="Ingrese un nombre"
+            :maxlength="80"
+            
+        />
+        <!-- <form @submit.prevent="guardarTodo()">
             <div class="mb-3">
                  <label for="Name" class="form-label">Nombre</label>
                  <input
@@ -120,16 +127,19 @@
 
             <br>
             <button class="btn  btn-success" type="submit">Guardar </button>
-        </form>
+        </form> -->
     </div>
 </template>
 
 <script>
 import { nanoid } from 'nanoid'
 import { mapActions } from 'vuex'
+
+import Input1 from '../components/Input1.vue'
+
 export default {
-    
     name: 'Agregar',
+    components:{Input1},
     data:()=> {
         return {
             todo:{

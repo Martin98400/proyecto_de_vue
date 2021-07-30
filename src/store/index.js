@@ -26,4 +26,14 @@ export default new Vuex.Store({
       .finally(() => commit('SET_LOADING', false))
     }
   },
+
+  agregarJuego({commit},{params,onComple,onError}){
+    axios.post('http://localhost:3500/boardgames',params)
+    .then(onComple)
+    .catch(onError);
+  },
+  modules:{
+
+  }
+
 })
