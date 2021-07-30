@@ -21,7 +21,7 @@ export default new Vuex.Store({
   actions: {
     listarjuegos({commit}){
       commit('SET_LOADING', true)
-      axios.get('http://localhost:3500/boardgame')
+      axios.get('http://localhost:3500/boardgames')
       .then(res => commit('SET_JUEGOS',res.data))
       .finally(() => commit('SET_LOADING', false))
     }

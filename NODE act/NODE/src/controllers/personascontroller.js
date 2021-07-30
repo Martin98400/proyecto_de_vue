@@ -2,25 +2,37 @@ const { json } = require('express');
 const connection  = require('../config/connections');
 
 
-
-
 function listar (req,res){
-if(connection){
-    let sql = "select * from BOARDGAMES";
+    if(connection){
+        let sql = "select * from BOARDGAMES";
+        
+        connection.query(sql, (err, boardgames) => {
+            if(err) {
+                res.status(400).json(err);
+            } else {
     
-    connection.query(sql, (err, boardgames) => {
-        if(err) {
-            res.status(400).json(err);
-        } else {
-            let mensaje = "";
-            if(boardgames === undefined || boardgames.length === 0)
-                mensaje="juego no encontrado";
+            res.json(boardgames);        }
+        })
+    }
+    }
 
-            res.json({result: boardgames[0], mensaje});
-        }
-    })
-}
-}
+// function listar (req,res){
+// if(connection){
+//     let sql = "select * from BOARDGAMES";
+    
+//     connection.query(sql, (err, boardgames) => {
+//         if(err) {
+//             res.status(400).json(err);
+//         } else {
+//             let mensaje = "";
+//             if(boardgames === undefined || boardgames.length === 0)
+//                 mensaje="juego no encontrado";
+
+//             res.json({results: boardgames["0"], mensaje});
+//         }
+//     })
+// }
+// }
 
 function optenerboardgamesid(req,res)
 {
@@ -85,8 +97,8 @@ function editar(req, res) {
                 if(data.changedRows === 0)
                     mensaje ="La información es la misma";
                 else
-                    mensaje ="Persona actualizada con exito"
-                res.json({error: false, result: data, mensaje});
+                    mensaje ="juego actualizado con exito"
+                res.json({error: false, results: data, mensaje});
             }
         });
     }
@@ -106,7 +118,7 @@ function eliminar(req, res){
                     mensaje = "juego no encontrado";
                 else
                     mensaje = "juego eliminada con éxito.";
-                res.json({error: false, result: data, mensaje});
+                res.json({error: false, results: data, mensaje});
             }
         });
 

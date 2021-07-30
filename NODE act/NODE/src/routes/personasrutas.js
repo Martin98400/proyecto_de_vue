@@ -4,7 +4,7 @@ const routes = express.Router();
 
 const {listar, optenerboardgamesid, agregar, editar, eliminar} = require ('../controllers/personascontroller')
 
-routes.get('/boardgame', listar);
+routes.get('/boardgames', listar);
 
 routes.get('/boardgames/:id',optenerboardgamesid);
 
