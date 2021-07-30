@@ -2,53 +2,42 @@ const { json } = require('express');
 const connection  = require('../config/connections');
 
 
+
+
 function listar (req,res){
-    if(connection){
-        let sql = "select * from BOARDGAMES";
-        
-        connection.query(sql, (err, boardgames) => {
-            if(err) {
-                res.status(400).json(err);
-            } else {
+if(connection){
+    let sql = "select * from BOARDGAMES";
     
-            res.json(boardgames);        }
-        })
-    }
-    }
+    connection.query(sql, (err, boardgames) => {
+        if(err) {
+            res.status(400).json(err);
+        } else {
 
-// function listar (req,res){
-// if(connection){
-//     let sql = "select * from BOARDGAMES";
-    
-//     connection.query(sql, (err, boardgames) => {
-//         if(err) {
-//             res.status(400).json(err);
-//         } else {
-//             let mensaje = "";
-//             if(boardgames === undefined || boardgames.length === 0)
-//                 mensaje="juego no encontrado";
-
-//             res.json({results: boardgames["0"], mensaje});
-//         }
-//     })
-// }
-// }
+        res.json(boardgames);        }
+    })
+}
+}
 
 function optenerboardgamesid(req,res)
 {
     if(connection){
         const {id} = req.params;
         let sql = `SELECT * FROM boardgames WHERE id = ${connection.escape(id)}`;
-
         connection.query(sql,(err,boardgames)=> {
         if(err){
             res.status(400).json(err);
         }else{
-            res.json(boardgames)
+
+            let mensaje = "";
+            if(boardgames === undefined || boardgames.length === 0)
+                mensaje="juego no encontrado";
+
+            res.json({result: boardgames[0], mensaje});
         }
     })
 }
 }
+
 
 function agregar(req, res) {
     if(connection){
@@ -97,8 +86,8 @@ function editar(req, res) {
                 if(data.changedRows === 0)
                     mensaje ="La información es la misma";
                 else
-                    mensaje ="juego actualizado con exito"
-                res.json({error: false, results: data, mensaje});
+                    mensaje ="Persona actualizada con exito"
+                res.json({error: false, result: data, mensaje});
             }
         });
     }
@@ -118,17 +107,31 @@ function eliminar(req, res){
                     mensaje = "juego no encontrado";
                 else
                     mensaje = "juego eliminada con éxito.";
-                res.json({error: false, results: data, mensaje});
+                res.json({error: false, result: data, mensaje});
             }
         });
 
     }
 }
+function favorites (req,res){
+    if(connection){
+        let sql = "select * from FAVORITES";
+        
+        connection.query(sql, (err, favorites) => {
+            if(err) {
+                res.status(400).json(err);
+            } else {
+    
+            res.json(favorites);        }
+        })
+    }
+    }
 
 module.exports = {
     listar,
-    optenerboardgamesid,
+   optenerboardgamesid,
     agregar,
     editar,
-    eliminar
+    eliminar,
+    favorites
 }

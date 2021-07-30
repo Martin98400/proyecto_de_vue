@@ -4,6 +4,8 @@
       <router-link to="/">Home</router-link> |
     </div>
     <router-view/>
+    <notifications position="botton right"/>
+
   </div>
 </template>
 

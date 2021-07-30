@@ -1,181 +1,155 @@
 <template>
     <div>
         <h1>Agregar Juego</h1>
-        <Input1
+        <form @submit.prevent="GuardarJuego()">
+
+            <Input1
+             v-model="juego.Name"
             titulo="Nombre"
-            :id="ID"
+            id="Name"
             placeholder="Ingrese un nombre"
             :maxlength="80"
-            
+            mensajeError="es necesario insertar el nombre"
+            :error="errorValidacion && !validacionNombre"
         />
-        <!-- <form @submit.prevent="guardarTodo()">
-            <div class="mb-3">
-                 <label for="Name" class="form-label">Nombre</label>
-                 <input
-                    v-model.trim="todo.Name"
-                    type="text"
-                    class="form-control"
-                    id="Name"
-                    placeholder="Ingrese un nombre"
-                    maxlength="80"
-                    required
-                    />
-            </div>
 
-            <div class="mb-3">
-                 <label for="Publisher" class="form-label">Editor</label>
-                 <input
-                    v-model.trim="todo.Publisher"
-                    type="text"
-                    class="form-control"
-                    id="Publisher"
-                    placeholder="Ingrese el nombre del editor"
-                    maxlength="60"
-                    required
-                    />
-            </div>
 
-            <div class="mb-3">
-                 <label for="Description" class="form-label">Descripcion</label>
-                 <input
-                    v-model.trim="todo.Description"
-                    type="text"
-                    class="form-control"
-                    id="Description"
-                    placeholder="Ingrese una descripcion"
-                    maxlength="200"
-                    />
-            </div>
+            <Input1
+             v-model="juego.Publisher"
 
-            <br>
-                <label for="Category" class="form-label">Categoria</label>
-                <br>
+            titulo="Publisher"
+            id="Publisher"
+            placeholder="Ingrese un editor"
+            :maxlength="60"
+            mensajeError="es necesario insertar el editor"
+        />
+       
+            <Input1
+             v-model="juego.Description"
 
-                <div class="form-check form-check-inline">
-                    <input
-                    v-model="todo.Category"
-                    class="form-check-input"
-                    type="checkbox"
-                    id="11"
-                    value="Adventure"
-                    
-                    />
-                    <label class="form-check-label" for="Adventure">Adventure</label>
-                </div>
-                
-                <div class="form-check form-check-inline">
-                    <input
-                    v-model="todo.Category"
-                    class="form-check-input"
-                    type="checkbox"
-                    id="12"
-                    value="Puzzle"
-                    
-                    />
-                    <label class="form-check-label" for="Puzzle">Puzzle</label>
-                </div>
+            titulo="Descripcion"
+            id="Description"
+            placeholder="Ingrese una descripcion"
+            :maxlength="200"
+            mensajeError="se nesesita una descripcion   "
+        />
 
-                <div class="form-check form-check-inline">
-                    <input
-                    v-model="todo.Category"
-                    class="form-check-input"
-                    type="checkbox"
-                    id="13"
-                    value="Strategy"
-                    />
-                    <label class="form-check-label" for="Strategy">Strategy</label>
-                </div>
+             <Input1
+            v-model="juego.Category"
 
-                <div class="form-check form-check-inline">
-                    <input
-                    v-model="todo.Category"
-                    class="form-check-input"
-                    type="checkbox"
-                    id="14"
-                    value="Fantasy"
-                    
-                    />
-                    <label class="form-check-label" for="Fantasy">Fantasy</label>
-                </div>
+            titulo="Categoria"
+            id="Category"
+            placeholder="Ingrese categorias ej:11-adventure,12-puzzle,13-estrategy,14-fantasy,15-civilization"
+            mensajeError="es necesario insertar la categoria"
+        />
 
-                <div class="form-check form-check-inline">
-                    <input
-                    v-model="todo.Category"
-                    class="form-check-input"
-                    type="checkbox"
-                    id="15"
-                    value="Civilization"
-                    
-                    />
-                    <label class="form-check-label" for="Civilization">Civilization</label>
-                </div>
+            <Input1
+             v-model="juego.Year"
 
-            <br>
-            <br>
-            <div class="mb-3">
-                <label for="año" class="form-label">Año Lanzado</label>
-                <input
-                v-model.number="todo.Year"
-                type="number"
-                class="form-control"
-                id="Year"
-                placeholder="Ingrese un año"
-                min="1000"
-                max="9999"
-                />
-            </div>
+            titulo="Year"
+            id="Year"
+            placeholder="año de lanzamiento"
+            :maxlength="4"
+            mensajeError="es necesario insertar el año de lanzamiento"
+        />
 
-            <br>
-            <button class="btn  btn-success" type="submit">Guardar </button>
-        </form> -->
+             <b-button type="submit" variant="primary" class="my-2">Guardar</b-button>
+
+<!-- <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+  <label class="form-check-label" for="flexCheckDefault">
+adventure
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+  <label class="form-check-label" for="flexCheckChecked">
+    puzzle
+  </label>
+
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+  <label class="form-check-label" for="flexCheckChecked">
+    estrategy
+  </label>
+  
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+  <label class="form-check-label" for="flexCheckChecked">
+    fantasy
+  </label>
+  
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+  <label class="form-check-label" for="flexCheckChecked">
+    civilization
+  </label>
+  
+</div> -->
+
+
+        </form>
     </div>
 </template>
 
 <script>
-import { nanoid } from 'nanoid'
-import { mapActions } from 'vuex'
+
 
 import Input1 from '../components/Input1.vue'
 
 export default {
     name: 'Agregar',
     components:{Input1},
-    data:()=> {
-        return {
-            todo:{
-                id: '',
-                Name: '',
-                Publisher: '',
-                Category: [],
-                Description: '',
-                Year: ''
-            }
-        }
-    },
-    methods:{
-        ...mapActions(['setTodos']),
-         
-         guardarTodo() {
-             console.log("todo", this.todo);
+   data(){
+       return{
+           juego:{
+               Name:'',
+               Publisher:'',
+               Description:'',
+               Category:'',
+               Year:''
+           },
+        errorValidacion: false
+       }
 
-             this.todo.id = nanoid(4);
-            console.log("id", this.todo.id);
+   },
+   computed:{
+       validacionNombre(){
+           return(this.juego.Name !==undefined && this.juego.Name.trim() !=='' )
+       }
+   },
+   methods:{
+       GuardarJuego(){
+           if(this.validacionNombre){
+            
+            this.errorValidacion = false;
+            console.log("si puede guardar");
 
-            this.setTodos(this.todo);
             this.limpiar();
-            this.$router.push({name: 'Home'}); //cambia a la vista de home al momento de hacer click en guardar 
+           }else{
+               this.errorValidacion = true;
 
-         },
-         limpiar(){
-            this.todo = {
-                id: '',
-                Name: '',
-                Publisher: '',
-                Category: [],
-                Description: '',
-                Year: ''
-                }
+           }
+        },
+
+        limpiar(){
+            this.juego={
+                Name:'',
+               Publisher:'',
+               Description:'',
+               Category:'',
+               Year:''
             }
-    },
+
+        }
+    }    
 };
+
+
+
 </script>
+
+<style> </style>

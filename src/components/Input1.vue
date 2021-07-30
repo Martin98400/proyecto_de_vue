@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label :for="id">{{titulo}}</label>
+        <label :for="id" class="m-2">{{titulo}}</label>
         <Input
             :id="id"
             :type="type"
@@ -9,6 +9,8 @@
             :disabled="disabled"
             :placeholder="placeholder"
             :readonly="readonly"
+             @input="$emit('input', $event.target.value)"
+
         />
      <span v-if="error" class="text-danger">{{mensajeError}}</span>
     </div>
@@ -19,7 +21,7 @@ export default {
     name:'Input1',
     props:{
         id:{
-            type:Number,
+            type:[Number,String ],
             require:true,
         },
         titulo:{
@@ -29,7 +31,7 @@ export default {
         type:{
             type:[String,Number],
         },
-        maxlenght:{
+        maxlength:{
             type:Number,
             default:100,
         },
@@ -44,6 +46,10 @@ export default {
         readonly:{
             type: Boolean,
             default:false,
+        },
+        error:{
+        type:Boolean,
+        default: false
         },
         mensajeError:{
             type:String,
