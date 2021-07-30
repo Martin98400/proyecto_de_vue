@@ -1,61 +1,41 @@
 <template>
   <div class="home m-3">    
     <b-button to="/agregar">Agregar</b-button>
-    <TablaBV :items="allTodos" :fields="campos">
+    <Tabla :items="juegos" >
+    </Tabla>
+    <!-- <TablaBV :items="juegos" :fields="campos">
        <template slot="actions" slot-scope="{ item }">
            <b-button size="sm">Editar</b-button>
            <b-button @click="eliminar(item)" size="sm" class="mx-2">Eliminar</b-button>
       </template>
-    </TablaBV>
+    </TablaBV> -->
   </div>
 </template>
 
 <script>
-import {mapState, mapGetters} from 'vuex'
+import {mapState,mapActions} from 'vuex'
+import Tabla from '../components/Tabla.vue'
 
-import TablaBV from '../components/TablaBV.vue'
 export default {
   name: 'Home',
   components: {
-    
-    TablaBV
-  },
-  data() {
-    return {
-      campos: [
-        {
-          key: 'id',
-          label: 'ID'
-        },
-        {
-          key:'Name',
-          label: 'Nombre'
-        },
-        {
-          key: 'Category',
-          formatter: value => {
-            return value.join(" , ")
-          }
-        },
-        {
-          key: 'Year',
-          label: 'Año Lanzado'
-        },
-        'acciones'
-      ]
-    }
+    Tabla
   },
   computed: {
-    ...mapState(['todos']),
-    ...mapGetters(['allTodos'])
+    ...mapState(['juegos'])
   },
   methods: {
+    ...mapActions(['listarjuegos']),
     vistaAgregar() {
       this.$router.push({ name: "Agregar" });
     },
     eliminar(item) {
       console.log("item", item);
-    }
+    },
+    
+  },
+  mounted(){
+    this.listarjuegos();
   }
 }
 </script>
